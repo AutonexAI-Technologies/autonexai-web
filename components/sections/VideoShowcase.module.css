@@ -76,19 +76,15 @@
   border-radius: 26px;
   overflow: hidden;
   background: #000;
-  /* Lock the frame to a 16:9 ratio — prevents collapse if video src is loading */
-  aspect-ratio: 16 / 9;
-  min-height: 200px;
+  /* min-height acts as a skeleton placeholder while video is loading/buffering */
+  min-height: 320px;
 }
 
 /* ── Video element ── */
 .video {
   display: block;
   width: 100%;
-  height: 100%;           /* fill the fixed-ratio bezel */
-  object-fit: cover;      /* crop to fill; change to 'contain' if zero-crop is preferred */
-  position: absolute;
-  inset: 0;
+  height: auto;   /* follows the video's own native ratio — zero cropping */
 }
 
 /* ── Inset highlight rim (subtle top glow) ── */
