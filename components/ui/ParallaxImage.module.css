@@ -1,0 +1,19 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.inner {
+  width: 100%;
+  height: 130%;  /* extra height to allow parallax travel */
+  margin-top: -15%;
+  position: relative;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

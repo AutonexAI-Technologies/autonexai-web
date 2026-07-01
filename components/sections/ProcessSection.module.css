@@ -1,0 +1,126 @@
+.section {
+  background: var(--bg-light);
+  padding: var(--section-gap) 0;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+.heading {
+  font-size: clamp(52px, 6vw, 96px);
+  line-height: 0.9;
+}
+.ghost { color: var(--text-muted-dark); }
+
+.sub {
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.7;
+  opacity: 0.65;
+  max-width: 420px;
+}
+
+/* Steps */
+.steps {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--divider);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 0 48px;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--divider);
+  align-items: start;
+  position: relative;
+}
+
+.stepLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6px;
+}
+
+.stepNum {
+  font-family: var(--font-display);
+  font-size: 40px;
+  letter-spacing: 0.06em;
+  color: var(--text-dark);
+  opacity: 0.22;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.connector {
+  width: 1px;
+  flex: 1;
+  min-height: 40px;
+  margin-top: 12px;
+  background: linear-gradient(to bottom, var(--text-dark), transparent);
+  opacity: 0.12;
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stepTitle {
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1;
+  color: var(--text-dark);
+  letter-spacing: 0.04em;
+}
+
+.stepDesc {
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.7;
+  color: var(--text-dark);
+  opacity: 0.7;
+  max-width: 560px;
+}
+
+.stepDetail {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  opacity: 0.35;
+  font-family: var(--font-body);
+  padding: 6px 12px;
+  border: 1px solid var(--divider);
+}
+
+.stepCta {
+  align-self: center;
+}
+
+@media (max-width: 900px) {
+  .header { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 60px 1fr; }
+  .stepCta { grid-column: 2; margin-top: 12px; }
+}
+
+@media (max-width: 640px) {
+  .step { grid-template-columns: 48px 1fr; gap: 0 20px; padding: 36px 0; }
+  .stepNum { font-size: 28px; }
+  .stepCta { grid-column: 1 / -1; margin-top: 4px; }
+  .header { margin-bottom: 52px; }
+}
+
+@media (max-width: 480px) {
+  .step { grid-template-columns: 40px 1fr; gap: 0 16px; padding: 28px 0; }
+  .stepNum { font-size: 24px; }
+  .stepDesc { font-size: clamp(14px, 3.5vw, 16px); }
+  .stepCta { display: none; }
+}

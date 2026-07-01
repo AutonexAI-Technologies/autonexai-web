@@ -1,0 +1,192 @@
+.section {
+  background: var(--bg-light);
+  padding: var(--section-gap) 0;
+}
+
+/* ── Header ── */
+.headerRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  align-items: end;
+  margin: 20px 0 72px;
+}
+
+.heading {
+  font-size: clamp(52px, 6.5vw, 100px);
+  line-height: 0.88;
+  color: var(--text-dark);
+}
+.ghost { color: var(--text-muted-dark); }
+
+.headingSub {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.78;
+  color: var(--text-dark);
+  opacity: 0.6;
+  max-width: 480px;
+  align-self: end;
+}
+
+/* ── Pillar grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--divider);
+  gap: 0;
+  margin-bottom: 64px;
+}
+
+.card {
+  padding: 44px 36px;
+  border-right: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background 0.3s;
+  cursor: default;
+}
+.card:hover { background: var(--text-dark); }
+.card:hover .cardTitle,
+.card:hover .cardBody { color: var(--text-light); }
+.card:hover .cardBody { opacity: 0.65; }
+
+/* Remove right border from 3rd column */
+.card:nth-child(3n) { border-right: none; }
+/* Remove bottom border from last row */
+.card:nth-child(4),
+.card:nth-child(5),
+.card:nth-child(6) { border-bottom: none; }
+
+.cardIcon { font-size: 28px; margin-bottom: 4px; }
+
+.cardTitle {
+  font-size: clamp(18px, 1.6vw, 26px);
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+  line-height: 1.05;
+  transition: color 0.3s;
+}
+
+.cardBody {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--text-dark);
+  opacity: 0.65;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+/* ── Promise strip ── */
+.promiseStrip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0 repeat(3, 1fr); /* spacers between */
+  align-items: center;
+  background: var(--text-dark);
+  padding: 40px 52px;
+  margin-bottom: 64px;
+  gap: 0;
+}
+
+/* Simpler: just flex */
+.promiseStrip {
+  display: flex;
+  align-items: center;
+  background: var(--text-dark);
+  padding: 40px 52px;
+  margin-bottom: 64px;
+  gap: 0;
+}
+
+.promiseItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+}
+
+.promiseVal {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 52px);
+  letter-spacing: 0.04em;
+  color: var(--text-light);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.promiseLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.promiseDivider {
+  width: 1px;
+  height: 52px;
+  background: rgba(255,255,255,0.1);
+  flex-shrink: 0;
+  margin: 0 24px;
+}
+
+/* ── CTA Row ── */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-top: 48px;
+  border-top: 1px solid var(--divider);
+}
+
+.ctaText {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 32px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  max-width: 520px;
+  line-height: 1.2;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1000px) {
+  .promiseStrip { padding: 32px; }
+  .promiseDivider { margin: 0 16px; }
+}
+@media (max-width: 900px) {
+  .headerRow { grid-template-columns: 1fr; gap: 24px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .card:nth-child(3n) { border-right: 1px solid var(--divider); }
+  .card:nth-child(2n) { border-right: none; }
+  .card:nth-child(4),
+  .card:nth-child(5),
+  .card:nth-child(6) { border-bottom: 1px solid var(--divider); }
+  .card:nth-child(5),
+  .card:nth-child(6) { border-bottom: none; }
+  .promiseStrip { flex-wrap: wrap; justify-content: center; gap: 32px; }
+  .promiseDivider { display: none; }
+  .promiseItem { min-width: 120px; }
+}
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .card { border-right: none; border-bottom: 1px solid var(--divider); padding: 32px 24px; }
+  .card:last-child { border-bottom: none; }
+  .ctaRow { flex-direction: column; align-items: flex-start; }
+  .promiseStrip { padding: 28px 20px; gap: 24px; }
+  .promiseItem { min-width: 100px; }
+}
+@media (max-width: 480px) {
+  .promiseStrip { padding: 24px 16px; }
+  .promiseItem { min-width: calc(50% - 12px); }
+  .promiseVal { font-size: clamp(24px, 6vw, 40px); }
+  .card { padding: 28px 20px; }
+  .headerRow { margin-bottom: 48px; }
+}

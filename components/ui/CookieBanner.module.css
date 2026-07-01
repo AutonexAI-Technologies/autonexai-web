@@ -1,0 +1,145 @@
+/* ── Overlay (bottom of screen) ── */
+.overlay {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999;
+  display: flex; justify-content: center; align-items: flex-end;
+  padding: 0 clamp(12px,3vw,24px) clamp(12px,3vw,24px);
+  pointer-events: none;
+  /* Animate in */
+  animation: slideUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Banner card ── */
+.banner {
+  pointer-events: all;
+  background: #05050a;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 -8px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+  padding: clamp(20px,3vw,28px) clamp(20px,4vw,32px);
+  display: flex; flex-direction: column; gap: 16px;
+  width: 100%; max-width: 720px;
+  backdrop-filter: blur(20px);
+}
+
+/* ── Header ── */
+.header {
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.title {
+  font-family: var(--font-body); font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 4px;
+}
+.subtitle {
+  font-family: var(--font-body); font-size: 12px; line-height: 1.6;
+  color: rgba(255,255,255,0.5);
+}
+.subtitle strong { color: rgba(255,255,255,0.75); font-weight: 600; }
+
+/* ── Preferences ── */
+.prefs {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid rgba(255,255,255,0.07);
+  animation: fadeIn 0.2s ease both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.prefRow {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.prefRow:last-child { border-bottom: none; }
+.prefInfo { flex: 1; }
+.prefName {
+  font-family: var(--font-body); font-size: 12px; font-weight: 700;
+  color: rgba(255,255,255,0.8); margin-bottom: 2px;
+}
+.prefDesc {
+  font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.5;
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative; flex-shrink: 0;
+  width: 44px; height: 24px; border-radius: 999px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer; transition: background 0.25s, border-color 0.25s;
+  display: flex; align-items: center; padding: 0 3px;
+}
+.toggleOn {
+  background: #fff; border-color: #fff;
+}
+.toggleDisabled { cursor: not-allowed; opacity: 0.5; }
+.toggleThumb {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.25s;
+}
+.toggleOn .toggleThumb {
+  transform: translateX(20px); background: #05050a;
+}
+
+/* ── Actions ── */
+.actions {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.btnText {
+  font-family: var(--font-body); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; color: rgba(255,255,255,0.35);
+  background: none; border: none; cursor: pointer;
+  text-decoration: underline; padding: 0;
+  transition: color 0.2s;
+}
+.btnText:hover { color: rgba(255,255,255,0.7); }
+.btnGroup { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btnOutline {
+  font-family: var(--font-body); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 10px 20px; background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6);
+  cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.btnOutline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+.btnPrimary {
+  font-family: var(--font-body); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 10px 20px; background: #fff; color: #05050a;
+  border: 1.5px solid #fff; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btnPrimary:hover { background: transparent; color: #fff; }
+
+/* ── Legal ── */
+.legal {
+  font-family: var(--font-body); font-size: 10px;
+  color: rgba(255,255,255,0.25); line-height: 1.6;
+  padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.legal a {
+  color: rgba(255,255,255,0.5); text-decoration: underline;
+  transition: color 0.2s;
+}
+.legal a:hover { color: #fff; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .actions { flex-direction: column; align-items: flex-start; }
+  .btnGroup { width: 100%; }
+  .btnOutline, .btnPrimary { flex: 1; text-align: center; }
+  .header { flex-direction: row; }
+  .icon { font-size: 20px; }
+}
+@media (max-width: 380px) {
+  .banner { padding: 16px; }
+  .prefRow { flex-direction: column; align-items: flex-start; gap: 10px; }
+}

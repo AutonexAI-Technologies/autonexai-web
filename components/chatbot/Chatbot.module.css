@@ -1,0 +1,206 @@
+.toggle {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--text-dark);
+  color: var(--text-light);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+  border: 2px solid var(--text-dark);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+}
+.toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.38);
+}
+
+.window {
+  position: fixed;
+  bottom: 96px;
+  right: 28px;
+  z-index: 9998;
+  width: 380px;
+  max-width: calc(100vw - 40px);
+  background: #fff;
+  border: 2px solid var(--text-dark);
+  box-shadow: 8px 8px 0 var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--text-dark);
+  color: var(--text-light);
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+.headerDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px #22c55e;
+}
+.headerTitle {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.headerSub {
+  font-size: 11px;
+  opacity: 0.55;
+  letter-spacing: 0.05em;
+}
+
+/* Messages */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 320px;
+  scrollbar-width: thin;
+}
+
+.message {
+  max-width: 86%;
+  padding: 11px 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  border-radius: 0;
+}
+
+.bot {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  border: 1px solid var(--divider);
+  align-self: flex-start;
+}
+
+.user {
+  background: var(--text-dark);
+  color: var(--text-light);
+  align-self: flex-end;
+  border: none;
+}
+
+/* Typing dots */
+.typing {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 14px;
+}
+.typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-dark);
+  opacity: 0.4;
+  animation: blink 1.2s infinite;
+}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.2; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* Link button */
+.linkBtn {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1.5px solid var(--text-dark);
+  color: var(--text-dark);
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  margin-left: 4px;
+}
+.linkBtn:hover {
+  background: var(--text-dark);
+  color: var(--text-light);
+}
+
+/* Quick-reply chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 16px 12px;
+  border-top: 1px solid var(--divider);
+}
+.chip {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1.5px solid var(--text-dark);
+  background: transparent;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.chip:hover {
+  background: var(--text-dark);
+  color: var(--text-light);
+}
+
+/* Input row */
+.inputRow {
+  display: flex;
+  align-items: stretch;
+  border-top: 2px solid var(--text-dark);
+}
+.input {
+  flex: 1;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: var(--text-dark);
+}
+.input::placeholder { color: rgba(0,0,0,0.3); }
+
+.send {
+  width: 48px;
+  background: var(--text-dark);
+  color: var(--text-light);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  border: none;
+}
+.send:disabled { opacity: 0.35; cursor: default; }
+.send:not(:disabled):hover { opacity: 0.8; }

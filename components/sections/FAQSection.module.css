@@ -1,0 +1,126 @@
+.section {
+  background: var(--bg-light);
+  padding: var(--section-gap) 0;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: clamp(40px, 8vw, 100px);
+  align-items: start;
+}
+
+.left {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  font-size: clamp(48px, 5.5vw, 88px);
+  line-height: 0.9;
+  color: var(--text-dark);
+}
+.ghost { color: var(--text-muted-dark); }
+
+.sub {
+  font-size: 15px;
+  line-height: 1.65;
+  opacity: 0.6;
+  max-width: 300px;
+  font-family: var(--font-body);
+}
+
+.ctaBtn { margin-top: 8px; }
+
+/* Accordion */
+.right { }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--divider);
+}
+
+.item {
+  border-bottom: 1px solid var(--divider);
+  transition: background 0.2s;
+}
+.active { background: rgba(0,0,0,0.02); }
+
+.trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.triggerNum {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dark);
+  opacity: 0.3;
+}
+
+.q {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.8vw, 26px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  line-height: 1.1;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--text-dark);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-dark);
+  flex-shrink: 0;
+  font-family: var(--font-body);
+}
+
+.answer { overflow: hidden; }
+
+.a {
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.75;
+  color: var(--text-dark);
+  opacity: 0.7;
+  padding: 0 0 28px 52px;
+  max-width: 620px;
+  font-family: var(--font-body);
+}
+
+@media (max-width: 900px) {
+  .inner { grid-template-columns: 1fr; }
+  .left { position: static; }
+  .heading { font-size: clamp(40px, 6vw, 72px); }
+}
+
+@media (max-width: 640px) {
+  .a { padding: 0 0 20px 36px; }
+  .trigger { grid-template-columns: 28px 1fr auto; gap: 12px; padding: 20px 0; }
+}
+
+@media (max-width: 480px) {
+  .a { padding: 0 0 16px 24px; font-size: clamp(14px, 3.5vw, 15px); }
+  .trigger { grid-template-columns: 24px 1fr auto; gap: 10px; padding: 18px 0; }
+  .q { font-size: clamp(16px, 4.5vw, 22px); }
+  .icon { width: 30px; height: 30px; font-size: 18px; }
+}
