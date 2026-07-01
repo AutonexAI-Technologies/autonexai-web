@@ -56,8 +56,7 @@
 
 /* ── Outer bezel (frosted glass frame) ── */
 .outerWrap {
-  /* Portrait-friendly width — keeps frame compact and tall for a vertical video */
-  max-width: 640px;
+  width: 100%;  /* fills the full .container width */
   margin-left: auto;
   margin-right: auto;
 }
@@ -75,16 +74,18 @@
   position: relative;
   border-radius: 26px;
   overflow: hidden;
-  /* No fixed aspect-ratio — frame height = video's natural height */
   background: #000;
+  aspect-ratio: 16 / 9; /* locks correct proportions while video is buffering */
 }
 
 /* ── Video element ── */
 .video {
   display: block;
-  width: 100%;           /* fills the full frame width */
-  height: auto;          /* height follows the video’s own native ratio */
-  /* No object-fit — 100% of the video is shown, zero cropping on any side */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
 }
 
 /* ── Inset highlight rim (subtle top glow) ── */
