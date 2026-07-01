@@ -56,9 +56,9 @@
 
 /* ── Outer bezel (frosted glass frame) ── */
 .outerWrap {
-  max-width: 390px;   /* portrait phone width — matches the vertical video */
+  display: block;
+  max-width: 390px;
   width: 100%;
-  /* fills the full .container width */
   margin-left: auto;
   margin-right: auto;
 }
@@ -71,22 +71,19 @@
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
 }
 
-/* ── Inner bezel ── */
+/* ── Inner bezel — wraps tightly around the video ── */
 .innerBezel {
   position: relative;
   border-radius: 26px;
   overflow: hidden;
   background: #000;
-  /* No aspect-ratio — wraps video's exact natural height (portrait) */
 }
 
-/* ── Video element ── */
+/* ── Video element — renders at its natural size ── */
 .video {
   display: block;
   width: 100%;
   height: auto;
-  /* show FULL frame — no cropping, no distortion */
-  position: relative;
 }
 
 /* ── Inset highlight rim (subtle top glow) ── */
