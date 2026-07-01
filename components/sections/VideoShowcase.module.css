@@ -75,16 +75,20 @@
   position: relative;
   border-radius: 26px;
   overflow: hidden;
-  /* No fixed aspect-ratio — frame height = video's natural height */
   background: #000;
+  /* Lock the frame to a 16:9 ratio — prevents collapse if video src is loading */
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
 }
 
 /* ── Video element ── */
 .video {
   display: block;
-  width: 100%;           /* fills the full frame width */
-  height: auto;          /* height follows the video’s own native ratio */
-  /* No object-fit — 100% of the video is shown, zero cropping on any side */
+  width: 100%;
+  height: 100%;           /* fill the fixed-ratio bezel */
+  object-fit: cover;      /* crop to fill; change to 'contain' if zero-crop is preferred */
+  position: absolute;
+  inset: 0;
 }
 
 /* ── Inset highlight rim (subtle top glow) ── */

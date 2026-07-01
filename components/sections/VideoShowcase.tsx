@@ -92,7 +92,10 @@ export default function VideoShowcase() {
               preload="auto"
               /* No autoPlay / no muted attr — starts paused, plays with sound on first click */
             >
-              <source src="/video/autonex.mp4" type="video/mp4" />
+              <source
+                src={process.env.NEXT_PUBLIC_VIDEO_URL || '/video/autonex.mp4'}
+                type="video/mp4"
+              />
             </video>
 
             {/* Inset highlight rim */}

@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# deploy scripts (contain API tokens — never commit)
+scripts/
+
+# generated files
+.video-url
+.env.vercel.local
