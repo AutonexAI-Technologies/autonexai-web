@@ -56,8 +56,7 @@
 
 /* ── Outer bezel (frosted glass frame) ── */
 .outerWrap {
-  /* Portrait-friendly width — keeps frame compact and tall for a vertical video */
-  max-width: 640px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
