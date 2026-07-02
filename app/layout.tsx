@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: { url: '/icons/logo.ico', type: 'image/x-icon' },
-    apple: { url: '/icons/logo.ico' },
-    shortcut: '/icons/logo.ico',
+    icon: [{ url: '/favicon.ico', type: 'image/x-icon', sizes: 'any' }],
+    apple: [{ url: '/favicon.ico' }],
+    shortcut: [{ url: '/favicon.ico', type: 'image/x-icon' }],
   },
   manifest: '/manifest.json',
   verification: {
@@ -93,6 +93,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* Favicon — explicit link overrides any Next.js generated icon */}
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
