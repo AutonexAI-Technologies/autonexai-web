@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/opengraph-image',
+        url: '/opengraph-image?v=3',
         width: 1200,
         height: 630,
         alt: 'Autonex AI Services',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Services — Autonex AI',
     description: 'Explore all 8 AI-powered services offered by Autonex AI — from high-performance web development to AI voice agents, lead generation, CRM automation, and more.',
-    images: ['/opengraph-image', '/images/logo-black.png'],
+    images: ['/opengraph-image?v=3', '/images/logo-black.png'],
   },
 };
 

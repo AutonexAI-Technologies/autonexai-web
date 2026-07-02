@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: 'High-performance AI automation & web development for ambitious businesses.',
     images: [
       {
-        url: '/opengraph-image',
+        url: '/opengraph-image?v=3',
         width: 1200,
         height: 630,
         alt: 'Autonex AI — Automate Today. Lead Tomorrow.',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     creator: '@autonexai',
     title: 'Autonex AI — Automate Today. Lead Tomorrow.',
     description: 'High-performance AI automation & web development.',
-    images: ['/opengraph-image', '/images/logo-black.png'],
+    images: ['/opengraph-image?v=3', '/images/logo-black.png'],
   },
   robots: {
     index: true,
