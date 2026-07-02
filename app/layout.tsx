@@ -65,13 +65,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: '/favicon.ico', type: 'image/x-icon' },
-      { url: '/icons/icon-192x192.png', type: 'image/png', sizes: '192x192' },
-    ],
-    apple: [
-      { url: '/apple-icon', sizes: '180x180', type: 'image/png' },
-    ],
+    icon: { url: '/icons/logo.ico', type: 'image/x-icon' },
+    apple: { url: '/icons/logo.ico' },
+    shortcut: '/icons/logo.ico',
   },
   manifest: '/manifest.json',
   verification: {
