@@ -74,10 +74,11 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   icons: {
     icon: [
-      { url: '/favicon.png?v=2', type: 'image/png' },
+      { url: '/favicon.ico?v=3', sizes: 'any', type: 'image/x-icon' },
+      { url: '/favicon.png?v=3', type: 'image/png' },
     ],
-    shortcut: '/favicon.png?v=2',
-    apple: '/apple-touch-icon.png?v=2',
+    shortcut: '/favicon.ico?v=3',
+    apple: '/apple-touch-icon.png?v=3',
   },
   verification: {
     google: 'your-google-search-console-verification-code',
