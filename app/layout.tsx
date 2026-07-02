@@ -41,6 +41,12 @@ export const metadata: Metadata = {
         height: 630,
         alt: 'Autonex AI — Automate Today. Lead Tomorrow.',
       },
+      {
+        url: '/images/logo-black.png',
+        width: 800,
+        height: 800,
+        alt: 'Autonex AI Logo',
+      },
     ],
   },
   twitter: {
@@ -49,7 +55,7 @@ export const metadata: Metadata = {
     creator: '@autonexai',
     title: 'Autonex AI — Automate Today. Lead Tomorrow.',
     description: 'High-performance AI automation & web development.',
-    images: ['/opengraph-image'],
+    images: ['/opengraph-image', '/images/logo-black.png'],
   },
   robots: {
     index: true,

@@ -7,6 +7,32 @@ import styles from './services.module.css';
 export const metadata: Metadata = {
   title: 'Services — Autonex AI',
   description: 'Explore all 8 AI-powered services offered by Autonex AI — from high-performance web development to AI voice agents, lead generation, CRM automation, and more.',
+  openGraph: {
+    title: 'Services — Autonex AI',
+    description: 'Explore all 8 AI-powered services offered by Autonex AI — from high-performance web development to AI voice agents, lead generation, CRM automation, and more.',
+    url: 'https://www.autonexai.org/services',
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Autonex AI Services',
+      },
+      {
+        url: '/images/logo-black.png',
+        width: 800,
+        height: 800,
+        alt: 'Autonex AI Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services — Autonex AI',
+    description: 'Explore all 8 AI-powered services offered by Autonex AI — from high-performance web development to AI voice agents, lead generation, CRM automation, and more.',
+    images: ['/opengraph-image', '/images/logo-black.png'],
+  },
 };
 
 export default function ServicesPage() {

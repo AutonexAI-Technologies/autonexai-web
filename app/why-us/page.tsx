@@ -6,6 +6,32 @@ import styles from './why-us.module.css';
 export const metadata: Metadata = {
   title: 'Why Autonex AI — The Partner Built for Growing Businesses',
   description: 'Discover why growing businesses choose Autonex AI for web development, AI automation, and business intelligence. Honest comparison, real guarantees, no fluff.',
+  openGraph: {
+    title: 'Why Autonex AI — The Partner Built for Growing Businesses',
+    description: 'Discover why growing businesses choose Autonex AI for web development, AI automation, and business intelligence. Honest comparison, real guarantees, no fluff.',
+    url: 'https://www.autonexai.org/why-us',
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Why Autonex AI',
+      },
+      {
+        url: '/images/logo-black.png',
+        width: 800,
+        height: 800,
+        alt: 'Autonex AI Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Why Autonex AI — The Partner Built for Growing Businesses',
+    description: 'Discover why growing businesses choose Autonex AI for web development, AI automation, and business intelligence. Honest comparison, real guarantees, no fluff.',
+    images: ['/opengraph-image', '/images/logo-black.png'],
+  },
 };
 
 const PROBLEMS = [

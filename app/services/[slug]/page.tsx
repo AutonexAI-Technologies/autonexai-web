@@ -20,6 +20,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${service.title} — Autonex AI`,
     description: service.shortDesc,
+    openGraph: {
+      title: `${service.title} — Autonex AI`,
+      description: service.shortDesc,
+      url: `https://www.autonexai.org/services/${slug}`,
+      type: 'website',
+      images: [
+        {
+          url: service.image || '/opengraph-image',
+          width: 1200,
+          height: 630,
+          alt: service.title,
+        },
+        {
+          url: '/images/logo-black.png',
+          width: 800,
+          height: 800,
+          alt: 'Autonex AI Logo',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${service.title} — Autonex AI`,
+      description: service.shortDesc,
+      images: [service.image || '/opengraph-image', '/images/logo-black.png'],
+    },
   };
 }
 

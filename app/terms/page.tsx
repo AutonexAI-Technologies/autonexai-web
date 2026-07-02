@@ -5,6 +5,26 @@ import styles from '../privacy/legal.module.css';
 export const metadata: Metadata = {
   title: 'Terms & Conditions — Autonex AI Technologies',
   description: 'Terms & Conditions for Autonex AI Technologies (v2.0). Governs all service engagements including scope, payments, IP, deployment, warranties, maintenance, and dispute resolution under Indian law.',
+  openGraph: {
+    title: 'Terms & Conditions — Autonex AI Technologies',
+    description: 'Terms & Conditions for Autonex AI Technologies (v2.0). Governs all service engagements including scope, payments, IP, deployment, warranties, maintenance, and dispute resolution under Indian law.',
+    url: 'https://www.autonexai.org/terms',
+    type: 'website',
+    images: [
+      {
+        url: '/images/logo-black.png',
+        width: 800,
+        height: 800,
+        alt: 'Autonex AI Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Terms & Conditions — Autonex AI Technologies',
+    description: 'Terms & Conditions for Autonex AI Technologies (v2.0). Governs all service engagements including scope, payments, IP, deployment, warranties, maintenance, and dispute resolution under Indian law.',
+    images: ['/images/logo-black.png'],
+  },
 };
 
 const EFFECTIVE_DATE = '25 May 2026';

@@ -6,6 +6,32 @@ import styles from './blog.module.css';
 export const metadata: Metadata = {
   title: 'Blog — AI Automation, Web Dev & Business Growth | Autonex AI',
   description: 'Practical guides on AI automation, web development, lead generation, and building systems that scale. From the Autonex AI team.',
+  openGraph: {
+    title: 'Blog — AI Automation, Web Dev & Business Growth | Autonex AI',
+    description: 'Practical guides on AI automation, web development, lead generation, and building systems that scale. From the Autonex AI team.',
+    url: 'https://www.autonexai.org/blog',
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Autonex AI Blog',
+      },
+      {
+        url: '/images/logo-black.png',
+        width: 800,
+        height: 800,
+        alt: 'Autonex AI Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog — AI Automation, Web Dev & Business Growth | Autonex AI',
+    description: 'Practical guides on AI automation, web development, lead generation, and building systems that scale. From the Autonex AI team.',
+    images: ['/opengraph-image', '/images/logo-black.png'],
+  },
 };
 
 export default function BlogPage() {

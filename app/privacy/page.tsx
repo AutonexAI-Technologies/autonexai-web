@@ -5,6 +5,26 @@ import styles from './legal.module.css';
 export const metadata: Metadata = {
   title: 'Privacy Policy — Autonex AI Technologies',
   description: 'Privacy Policy for Autonex AI Technologies (v2.0). Learn how we collect, use, store, and protect your personal data in compliance with the Digital Personal Data Protection Act 2023, Information Technology Act 2000, and applicable Indian regulations.',
+  openGraph: {
+    title: 'Privacy Policy — Autonex AI Technologies',
+    description: 'Privacy Policy for Autonex AI Technologies (v2.0). Learn how we collect, use, store, and protect your personal data in compliance with the Digital Personal Data Protection Act 2023, Information Technology Act 2000, and applicable Indian regulations.',
+    url: 'https://www.autonexai.org/privacy',
+    type: 'website',
+    images: [
+      {
+        url: '/images/logo-black.png',
+        width: 800,
+        height: 800,
+        alt: 'Autonex AI Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy — Autonex AI Technologies',
+    description: 'Privacy Policy for Autonex AI Technologies (v2.0). Learn how we collect, use, store, and protect your personal data in compliance with the Digital Personal Data Protection Act 2023, Information Technology Act 2000, and applicable Indian regulations.',
+    images: ['/images/logo-black.png'],
+  },
 };
 
 const EFFECTIVE_DATE = '25 May 2026';
