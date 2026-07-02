@@ -12,10 +12,10 @@
   "categories": ["business", "productivity", "utilities"],
   "icons": [
     {
-      "src": "/icons/logo.ico",
+      "src": "/favicon.ico",
       "sizes": "any",
       "type": "image/x-icon",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -24,14 +24,14 @@
       "short_name": "Book Call",
       "description": "Schedule a free 30-minute strategy call",
       "url": "/book",
-      "icons": [{ "src": "/icons/logo.ico", "sizes": "any" }]
+      "icons": [{ "src": "/favicon.ico", "sizes": "any" }]
     },
     {
       "name": "Our Services",
       "short_name": "Services",
       "description": "Explore our AI automation services",
       "url": "/services",
-      "icons": [{ "src": "/icons/logo.ico", "sizes": "any" }]
+      "icons": [{ "src": "/favicon.ico", "sizes": "any" }]
     }
   ],
   "related_applications": [],

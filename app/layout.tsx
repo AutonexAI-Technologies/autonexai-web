@@ -66,6 +66,13 @@ export const metadata: Metadata = {
   },
 
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
   verification: {
     google: 'your-google-search-console-verification-code',
   },
