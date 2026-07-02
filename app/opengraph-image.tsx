@@ -1,10 +1,15 @@
 import { ImageResponse } from 'next/og';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 export const alt = 'Autonex AI — Automate Today. Lead Tomorrow.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default function OGImage() {
+  const logoData = readFileSync(join(process.cwd(), 'public/images/main-autonex-logo-mid.png'));
+  const logoBase64 = `data:image/png;base64,${logoData.toString('base64')}`;
+
   return new ImageResponse(
     (
       <div
@@ -46,28 +51,20 @@ export default function OGImage() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 12,
+            gap: 16,
             marginBottom: 'auto',
             position: 'relative',
           }}
         >
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: '50%',
-              border: '1.5px solid rgba(255,255,255,0.2)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontSize: 18,
-              fontWeight: 900,
-            }}
-          >
-            A
-          </div>
-          <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, fontWeight: 600, letterSpacing: 3 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logoBase64}
+            alt="Autonex AI Logo"
+            width={64}
+            height={64}
+            style={{ objectFit: 'contain' }}
+          />
+          <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 15, fontWeight: 700, letterSpacing: 4 }}>
             AUTONEX AI
           </span>
         </div>

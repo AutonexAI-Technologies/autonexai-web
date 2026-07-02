@@ -69,9 +69,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/apple-icon.png', sizes: '512x512', type: 'image/png' },
     ],
     shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    apple: [{ url: '/apple-icon.png', sizes: '512x512', type: 'image/png' }],
   },
   verification: {
     google: 'your-google-search-console-verification-code',
@@ -85,7 +87,7 @@ export const viewport: Viewport = {
   maximumScale: 5,     // allow user zoom (accessibility)
   userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: dark)',  color: '#05050a' },
+    { media: '(prefers-color-scheme: dark)', color: '#05050a' },
     { media: '(prefers-color-scheme: light)', color: '#F0EEEA' },
   ],
   colorScheme: 'dark light',
