@@ -1,6 +1,6 @@
 ---
 title: "The Complete Guide to AI Lead Generation for B2B Businesses"
-date: "2025-05-20"
+date: "2026-06-24"
 excerpt: "Cold outreach is broken — but AI-powered lead generation is fixing it. Here's the complete framework for building a pipeline that fills itself with qualified prospects."
 coverImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80"
 tags: ["Lead Generation", "AI", "Sales", "Automation"]

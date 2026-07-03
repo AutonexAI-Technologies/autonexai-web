@@ -1,6 +1,6 @@
 ---
 title: "How AI Automation is Transforming Business Operations in 2025"
-date: "2025-06-10"
+date: "2026-06-31"
 excerpt: "AI automation is no longer a luxury for large enterprises. Here's how startups and growing businesses are eliminating manual work and scaling faster than ever."
 coverImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&q=80"
 tags: ["AI", "Automation", "Business Growth"]

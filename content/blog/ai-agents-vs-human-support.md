@@ -1,6 +1,6 @@
 ---
 title: "AI Agents vs Human Support Teams: The Honest Comparison"
-date: "2025-06-25"
+date: "2025-07-01"
 excerpt: "AI sales and support agents aren't replacing your team — they're multiplying what your team can do. Here's an honest look at where AI agents outperform humans, and where humans still win."
 coverImage: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1200&q=80"
 tags: ["AI", "Sales", "Support", "Automation"]

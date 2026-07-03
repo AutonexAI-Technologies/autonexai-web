@@ -1,6 +1,6 @@
 ---
 title: "CRM Automation: How Growing Businesses Reclaim 10+ Hours a Week"
-date: "2025-05-05"
+date: "2026-06-20"
 excerpt: "Your CRM should be doing the work, not your team. Here's a practical guide to the CRM automations that every growing business should have running — and how to build them."
 coverImage: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&q=80"
 tags: ["CRM", "Automation", "Operations", "Business Growth"]

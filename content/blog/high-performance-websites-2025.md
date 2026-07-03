@@ -1,6 +1,6 @@
 ---
 title: "Why Website Performance Directly Impacts Your Revenue"
-date: "2025-04-15"
+date: "2026-06-15"
 excerpt: "A slow website isn't just a technical problem — it's a revenue problem. Here's the data on how page speed affects conversions, SEO, and business growth."
 coverImage: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=1200&q=80"
 tags: ["Web Development", "Performance", "SEO", "Business Growth"]
