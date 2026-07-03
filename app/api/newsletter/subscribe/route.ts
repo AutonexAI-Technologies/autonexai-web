@@ -1,14 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import { join } from 'path';
 import { createHmac } from 'crypto';
 import { resolveMx } from 'dns';
 import { promisify } from 'util';
 import nodemailer from 'nodemailer';
+import { neon } from '@neondatabase/serverless';
 
 const resolveMxAsync = promisify(resolveMx);
 
-// ── Disposable / known-spam email domains ──────────────────────────────────
+// ── Neon SQL client ────────────────────────────────────────────────────────────
+function getDb() {
+  const url = process.env.DATABASE_URL;
+  if (!url) throw new Error('DATABASE_URL is not set');
+  return neon(url);
+}
+
+// ── Ensure subscribers table exists ───────────────────────────────────────────
+async function ensureTable() {
+  const sql = getDb();
+  await sql`
+    CREATE TABLE IF NOT EXISTS subscribers (
+      id         SERIAL PRIMARY KEY,
+      email      TEXT UNIQUE NOT NULL,
+      token      TEXT NOT NULL,
+      subscribed_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
+}
+
+// ── Disposable / known-spam email domains ──────────────────────────────────────
 const DISPOSABLE_DOMAINS = new Set([
   'mailinator.com', 'guerrillamail.com', 'tempmail.com', 'throwaway.email',
   'fakeinbox.com', 'yopmail.com', 'sharklasers.com', 'guerrillamailblock.com',
@@ -25,18 +44,18 @@ const DISPOSABLE_DOMAINS = new Set([
   'anonbox.net', 'spamfree24.org', 'tempmailo.com', 'zzrgg.com',
 ]);
 
-// ── HMAC token for unsubscribe links ──────────────────────────────────────
+// ── HMAC token for unsubscribe links ──────────────────────────────────────────
 function generateToken(email: string): string {
-  const secret = process.env.NEWSLETTER_SECRET ?? 'autonex-newsletter-secret-2026';
+  const secret = process.env.NEWSLETTER_SECRET ?? 'autonex-nl-secret-2026-xK9mP3qR7vL2nJ5w';
   return createHmac('sha256', secret).update(email.toLowerCase()).digest('hex');
 }
 
-// ── Validate email format ──────────────────────────────────────────────────
+// ── Validate email format ──────────────────────────────────────────────────────
 function isValidEmailFormat(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
 }
 
-// ── Check MX records (verifies domain can receive email) ──────────────────
+// ── Check MX records (verifies domain can receive email) ──────────────────────
 async function hasMxRecord(domain: string): Promise<boolean> {
   try {
     const records = await resolveMxAsync(domain);
@@ -46,29 +65,7 @@ async function hasMxRecord(domain: string): Promise<boolean> {
   }
 }
 
-// ── Read/write subscribers ─────────────────────────────────────────────────
-const DATA_FILE = join(process.cwd(), 'data', 'subscribers.json');
-
-interface Subscriber {
-  email: string;
-  subscribedAt: string;
-  token: string;
-}
-
-async function readSubscribers(): Promise<Subscriber[]> {
-  try {
-    const raw = await fs.readFile(DATA_FILE, 'utf-8');
-    return JSON.parse(raw).subscribers ?? [];
-  } catch {
-    return [];
-  }
-}
-
-async function writeSubscribers(subscribers: Subscriber[]): Promise<void> {
-  await fs.writeFile(DATA_FILE, JSON.stringify({ subscribers }, null, 2), 'utf-8');
-}
-
-// ── Send welcome email ─────────────────────────────────────────────────────
+// ── Send welcome email ─────────────────────────────────────────────────────────
 async function sendWelcomeEmail(email: string, token: string) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -129,7 +126,7 @@ async function sendWelcomeEmail(email: string, token: string) {
   });
 }
 
-// ── Notify company of new subscriber ──────────────────────────────────────
+// ── Notify company of new subscriber ──────────────────────────────────────────
 async function notifyCompany(email: string) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -150,7 +147,7 @@ async function notifyCompany(email: string) {
   });
 }
 
-// ── POST handler ───────────────────────────────────────────────────────────
+// ── POST handler ───────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json();
@@ -170,42 +167,59 @@ export async function POST(req: NextRequest) {
 
     // Disposable domain check
     if (DISPOSABLE_DOMAINS.has(domain)) {
-      return NextResponse.json({ error: 'Disposable email addresses are not allowed. Please use your real email.' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Disposable email addresses are not allowed. Please use your real email.' },
+        { status: 400 },
+      );
     }
 
     // MX record check (verifies domain actually exists and can receive mail)
     const hasMx = await hasMxRecord(domain);
     if (!hasMx) {
-      return NextResponse.json({ error: 'This email domain does not appear to exist. Please check and try again.' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'This email domain does not appear to exist. Please check and try again.' },
+        { status: 400 },
+      );
     }
 
-    // Check for duplicate
-    const subscribers = await readSubscribers();
-    const existing = subscribers.find(s => s.email === trimmed);
-    if (existing) {
-      return NextResponse.json({ message: 'You\'re already subscribed! 🎉 Check your inbox for our latest articles.' }, { status: 200 });
+    // Ensure the table exists (wrapped in try-catch so it won't crash if table already exists or due to permission checks)
+    try {
+      await ensureTable();
+    } catch (dbErr) {
+      console.warn('ensureTable warning:', dbErr);
     }
 
-    // Generate token and save
+    const sql = getDb();
     const token = generateToken(trimmed);
-    const newSubscriber: Subscriber = {
-      email: trimmed,
-      subscribedAt: new Date().toISOString(),
-      token,
-    };
 
-    subscribers.push(newSubscriber);
-    await writeSubscribers(subscribers);
+    // Insert — if email already exists the ON CONFLICT clause skips silently
+    const result = await sql`
+      INSERT INTO subscribers (email, token)
+      VALUES (${trimmed}, ${token})
+      ON CONFLICT (email) DO NOTHING
+      RETURNING id
+    `;
 
-    // Fire emails (non-blocking — don't fail the response if email fails)
-    Promise.all([
-      sendWelcomeEmail(trimmed, token).catch(console.error),
-      notifyCompany(trimmed).catch(console.error),
+    // If no row was returned the email was already in the DB
+    if (result.length === 0) {
+      return NextResponse.json(
+        { message: 'You\'re already subscribed! 🎉 Check your inbox for our latest articles.' },
+        { status: 200 },
+      );
+    }
+
+    // Await sending emails so Vercel doesn't freeze before mail is sent
+    await Promise.all([
+      sendWelcomeEmail(trimmed, token).catch(err => console.error('Welcome email failed:', err)),
+      notifyCompany(trimmed).catch(err => console.error('Company notification failed:', err)),
     ]);
 
-    return NextResponse.json({ message: 'Subscribed successfully! Welcome to the journal. 🎉' }, { status: 200 });
-  } catch (err) {
+    return NextResponse.json(
+      { message: 'Subscribed successfully! Welcome to the journal. 🎉' },
+      { status: 200 },
+    );
+  } catch (err: any) {
     console.error('[newsletter/subscribe]', err);
-    return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
+    return NextResponse.json({ error: err?.message || 'Something went wrong. Please try again.', details: err?.stack || String(err) }, { status: 500 });
   }
 }

@@ -10,6 +10,7 @@
     "notify-post": "npx ts-node --project tsconfig.json -e \"require('./scripts/notify-subscribers').notifyAll(process.argv[2])\""
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@types/canvas-confetti": "^1.9.0",
     "@types/nodemailer": "^8.0.1",
     "@types/three": "^0.185.0",

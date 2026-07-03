@@ -1,34 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import { join } from 'path';
 import { createHmac } from 'crypto';
+import { neon } from '@neondatabase/serverless';
 
+// ── Neon SQL client ────────────────────────────────────────────────────────────
+function getDb() {
+  const url = process.env.DATABASE_URL;
+  if (!url) throw new Error('DATABASE_URL is not set');
+  return neon(url);
+}
+
+// ── HMAC token validation ──────────────────────────────────────────────────────
 function generateToken(email: string): string {
-  const secret = process.env.NEWSLETTER_SECRET ?? 'autonex-newsletter-secret-2026';
+  const secret = process.env.NEWSLETTER_SECRET ?? 'autonex-nl-secret-2026-xK9mP3qR7vL2nJ5w';
   return createHmac('sha256', secret).update(email.toLowerCase()).digest('hex');
 }
 
-const DATA_FILE = join(process.cwd(), 'data', 'subscribers.json');
-
-interface Subscriber {
-  email: string;
-  subscribedAt: string;
-  token: string;
-}
-
-async function readSubscribers(): Promise<Subscriber[]> {
-  try {
-    const raw = await fs.readFile(DATA_FILE, 'utf-8');
-    return JSON.parse(raw).subscribers ?? [];
-  } catch {
-    return [];
-  }
-}
-
-async function writeSubscribers(subscribers: Subscriber[]): Promise<void> {
-  await fs.writeFile(DATA_FILE, JSON.stringify({ subscribers }, null, 2), 'utf-8');
-}
-
+// ── GET handler ────────────────────────────────────────────────────────────────
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const email = searchParams.get('email')?.toLowerCase().trim();
@@ -41,6 +28,7 @@ export async function GET(req: NextRequest) {
     });
   }
 
+  // Validate HMAC token
   const expectedToken = generateToken(email);
   if (token !== expectedToken) {
     return new NextResponse(unsubscribePage('Invalid or expired unsubscribe link.', false), {
@@ -49,23 +37,35 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  const subscribers = await readSubscribers();
-  const filtered = subscribers.filter(s => s.email !== email);
+  try {
+    const sql = getDb();
 
-  if (filtered.length === subscribers.length) {
-    // Email wasn't found — already unsubscribed
-    return new NextResponse(unsubscribePage("You're already unsubscribed.", true), {
+    const result = await sql`
+      DELETE FROM subscribers
+      WHERE email = ${email}
+      RETURNING id
+    `;
+
+    if (result.length === 0) {
+      // Email wasn't found — already unsubscribed
+      return new NextResponse(unsubscribePage("You're already unsubscribed.", true), {
+        headers: { 'Content-Type': 'text/html' },
+      });
+    }
+
+    return new NextResponse(unsubscribePage("You've been successfully unsubscribed.", true), {
       headers: { 'Content-Type': 'text/html' },
     });
+  } catch (err) {
+    console.error('[newsletter/unsubscribe]', err);
+    return new NextResponse(unsubscribePage('Something went wrong. Please try again.', false), {
+      headers: { 'Content-Type': 'text/html' },
+      status: 500,
+    });
   }
-
-  await writeSubscribers(filtered);
-
-  return new NextResponse(unsubscribePage("You've been successfully unsubscribed.", true), {
-    headers: { 'Content-Type': 'text/html' },
-  });
 }
 
+// ── HTML response page ─────────────────────────────────────────────────────────
 function unsubscribePage(message: string, success: boolean): string {
   return `<!DOCTYPE html>
 <html lang="en">
