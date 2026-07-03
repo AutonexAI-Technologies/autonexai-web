@@ -61,7 +61,7 @@ const securityHeaders = [
       `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
       // Fonts: Google Fonts CDN
       `font-src 'self' https://fonts.gstatic.com data:`,
-      // Images: self + Unsplash + data URIs + blob (covers CSS background-image)
+      // Images: self + Unsplash + data URIs
       `img-src 'self' https://images.unsplash.com https://www.gravatar.com data: blob:`,
       // Frames: Cal.com embed
       `frame-src 'self' https://cal.com https://app.cal.com`,

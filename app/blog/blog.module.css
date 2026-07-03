@@ -299,37 +299,9 @@
   border: 2px solid var(--text-dark); cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-.newsletterBtn:hover:not(:disabled) { background: transparent; color: var(--text-dark); }
-.newsletterBtn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-.inputWrapper { position: relative; width: 100%; }
-
-.inputError { border-color: #e53e3e !important; background: #fff5f5 !important; }
-
-.newsletterMessage {
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.5;
-  padding: 10px 14px;
-}
-.msgSuccess {
-  background: rgba(16, 185, 129, 0.08);
-  color: #059669;
-  border: 1px solid rgba(16, 185, 129, 0.25);
-}
-.msgError {
-  background: rgba(229, 62, 62, 0.06);
-  color: #c53030;
-  border: 1px solid rgba(229, 62, 62, 0.2);
-}
-
-.newsletterDisclaimer {
-  font-family: var(--font-body);
-  font-size: 11px;
-  color: rgba(0,0,0,0.3);
-  margin-top: 4px;
-}
+.newsletterBtn:hover { background: transparent; color: var(--text-dark); }
 
 @media (max-width: 900px) {
   .newsletterInner { grid-template-columns: 1fr; }
 }
+

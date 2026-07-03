@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { href: '/services', label: 'Services' },
   { href: '/why-us', label: 'Why Us' },
   { href: '/blog', label: 'Blog' },
-  { href: '/careers', label: 'Careers' },
   { href: '/contact', label: 'Contact' },
 ];
 
