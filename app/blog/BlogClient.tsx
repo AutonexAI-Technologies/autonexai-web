@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { BlogMeta } from '@/lib/types';
 import { formatDate } from '@/lib/utils';
 import styles from './blog.module.css';
+import NewsletterForm from './NewsletterForm';
 
 function initials(name: string) {
   return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
@@ -138,16 +139,7 @@ export default function BlogClient({ posts }: Props) {
                 that scale. Delivered weekly. No spam.
               </p>
             </div>
-            <div className={styles.newsletterForm}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className={styles.newsletterInput}
-              />
-              <button className={styles.newsletterBtn} type="button">
-                Subscribe →
-              </button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
       </div>

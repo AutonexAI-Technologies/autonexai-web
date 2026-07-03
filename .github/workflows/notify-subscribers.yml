@@ -1,0 +1,50 @@
+name: 🔔 Notify Subscribers — New Blog Post
+
+# Triggers automatically when any .md file inside content/blog/ is added
+# on a push to the main branch (i.e. after Vercel deploys).
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/blog/**.md'
+      - 'content/blog/**.mdx'
+
+jobs:
+  notify:
+    name: Detect new post & notify subscribers
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout with full history so we can diff ──────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2          # need the previous commit to detect additions
+
+      # ── 2. Find files added in this push ─────────────────────────────────
+      - name: Find new blog posts
+        id: detect
+        run: |
+          # List files that were ADDED (A) in this commit only
+          NEW_FILES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'content/blog/*.md' 'content/blog/*.mdx' || true)
+          echo "new_files=$NEW_FILES" >> $GITHUB_OUTPUT
+          echo "Detected new files: $NEW_FILES"
+
+      # ── 3. Send notification for each new post ────────────────────────────
+      - name: Notify subscribers
+        if: steps.detect.outputs.new_files != ''
+        env:
+          NEWSLETTER_SECRET: ${{ secrets.NEWSLETTER_SECRET }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          # Strip directory prefix and extension to get the slug
+          for FILE in ${{ steps.detect.outputs.new_files }}; do
+            SLUG=$(basename "$FILE" | sed 's/\.[^.]*$//')
+            echo "→ Notifying for slug: $SLUG"
+            RESPONSE=$(curl -s -o /tmp/response.txt -w "%{http_code}" \
+              -X POST "${SITE_URL}/api/newsletter/notify-new-post" \
+              -H "Authorization: Bearer ${NEWSLETTER_SECRET}" \
+              -H "Content-Type: application/json" \
+              -d "{\"slug\": \"${SLUG}\"}")
+            echo "HTTP $RESPONSE — $(cat /tmp/response.txt)"
+          done
