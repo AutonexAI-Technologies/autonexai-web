@@ -36,16 +36,10 @@ export const metadata: Metadata = {
     description: 'High-performance AI automation & web development for ambitious businesses.',
     images: [
       {
-        url: '/opengraph-image?v=3',
+        url: '/images/tag-preview-card.jpeg',
         width: 1200,
         height: 630,
         alt: 'Autonex AI — Automate Today. Lead Tomorrow.',
-      },
-      {
-        url: '/images/logo-black.png',
-        width: 800,
-        height: 800,
-        alt: 'Autonex AI Logo',
       },
     ],
   },
@@ -55,7 +49,7 @@ export const metadata: Metadata = {
     creator: '@autonexai',
     title: 'Autonex AI — Automate Today. Lead Tomorrow.',
     description: 'High-performance AI automation & web development.',
-    images: ['/opengraph-image?v=3', '/images/logo-black.png'],
+    images: ['/images/tag-preview-card.jpeg'],
   },
   robots: {
     index: true,
@@ -74,11 +68,13 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   icons: {
     icon: [
-      { url: '/favicon.ico?v=3', sizes: 'any', type: 'image/x-icon' },
-      { url: '/favicon.png?v=3', type: 'image/png' },
+      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.png', sizes: '48x48', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico?v=3',
-    apple: '/apple-touch-icon.png?v=3',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
   },
   verification: {
     google: 'your-google-search-console-verification-code',

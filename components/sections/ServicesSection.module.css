@@ -323,6 +323,7 @@
   .expandInner { grid-template-columns: 280px 1fr; padding-left: 80px; }
 }
 @media (max-width: 900px) {
+  .cursorPreview { display: none; }
   .headerInner { grid-template-columns: 1fr; }
   .itemRow { grid-template-columns: 48px 36px 1fr 44px; padding: 28px 0; }
   .expandInner { grid-template-columns: 1fr; padding-left: 0; gap: 32px; }

@@ -73,14 +73,21 @@
 }
 
 .social {
-  font-size: var(--text-small);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: rgba(255,255,255,0.45);
   text-decoration: none;
-  transition: opacity 0.2s;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.social:hover { opacity: 1; }
+.social:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.06);
+}
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 768px) {
